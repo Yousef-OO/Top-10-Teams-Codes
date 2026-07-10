@@ -1,0 +1,42 @@
+{
+    "name": "scatter_cnn",
+    "train_batch_size": 256,
+    "val_batch_size": 256,
+    "data_cached": false,
+    "use_class_weighting": false,
+    "dataloader_worker": 8,
+    "replace_equivalent_classes": false,
+    "normal_xor_abnormal": false,
+    "optimizer": "adam",
+    "loss_type": "bce",
+    "scored_only": true,
+    "epochs": 1,
+    "learning_rate": 1e-3,
+    "input_length": 8192,
+
+    "train_preprocess_fillzero_enable": true,
+    "train_preprocess_fillzero_length": 8192,
+    "preprocess_scatter_enable": true,
+    "preprocess_scatter_order": 3,
+    "augment_powernoise_enabled": true,
+    "augment_randomnoise_enabled": true,
+    "augment_dropoutbursts_enabled": false,
+    "augment_leadfalloff_enabled": false,
+    "augment_randomcrop_enabled": false,
+    "train_postprocess_normalize_enable": false,
+    "val_normalize_enable": false,
+
+    "feature_extractor": {
+        "type": "simple_cnn",
+        "conv1d_channels":[24, 36, 48, 60],
+        "conv1d_kernels": [25, 20, 10, 5],
+        "conv1d_strides": [5, 5, 5, 5],
+        "conv1d_paddings": [0, 2, 4, 0],
+        "dropouts": [0.1, 0.1, 0.1, 0.1]
+    },
+
+    "classifier": {
+        "linear": [256, 128],
+        "dropouts": [0.45, 0.2]
+    }
+}

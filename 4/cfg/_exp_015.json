@@ -1,0 +1,51 @@
+{
+    "_COMMENT_": "SCATTEREDBOTTLE SCATTEREDSKIP AND HIGHER AUGMENTATION",
+
+    "name": "experiment_15_",
+    "train_batch_size": 96,
+    "val_batch_size": 96,
+    "test_batch_size": 96,
+    "data_cached": false,
+    "use_class_weighting": false,
+    "dataloader_worker": 16,
+    "replace_equivalent_classes": false,
+    "normal_xor_abnormal": false,
+    "optimizer": "adam",
+    "loss_type": "both",
+    "scored_only": true,
+    "epochs": 512,
+    "learning_rate": 3e-3,
+    "input_length": 5120,
+
+    "train_preprocess_fillzero_enable": true,
+    "train_preprocess_fillzero_length": 5120,
+
+    "augment_powernoise_noise" : 0.12,
+    "augment_randomnoise_sigma": 0.12,
+    "augment_drift_sigma": 1.5,
+
+    "postprocess_atan_enable": true,
+
+    "feature_extractor": {
+        "type": "resnet_attention",
+        "residual_block": "ScatteredBottle",
+        "residual_layers": [3, 4, 6, 3],
+        "residual_planes": [24, 48, 96, 192],
+        "residual_inplanes": 24,
+        "residual_hidden": 96,
+        "residual_zero_init": false,
+        "residual_groups": 1,
+        "residual_width_per_group": 12,
+        "residual_scattered_skip": true,
+        "attention_input_channels": 96,
+        "attention_activation": false,
+        "attention_input_stride": 2,
+        "attention_n_heads": 12
+    },
+
+    "classifier": {
+        "adaptive_average_in_time": 8,
+        "linear": [256, 128],
+        "dropouts": [0.25, 0.25]
+    }
+}

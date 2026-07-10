@@ -1,0 +1,6 @@
+model_checkpoint_path: "epoch_33_score_58"
+all_model_checkpoint_paths: "epoch_22_score_55"
+all_model_checkpoint_paths: "epoch_30_score_56"
+all_model_checkpoint_paths: "epoch_31_score_57"
+all_model_checkpoint_paths: "epoch_32_score_57"
+all_model_checkpoint_paths: "epoch_33_score_58"

@@ -1,0 +1,14 @@
+numpy==1.18.1
+scipy==1.1.0
+scikit-learn==0.22
+PyWavelets==1.1.1
+Keras==2.2.4
+tqdm==4.40.2
+sklearn==0.0
+tensorboard-logger==0.1.0
+pyentrp==0.6.0
+torchvision==0.3.0
+torch==1.1.0
+tensorflow==1.13.1
+biosppy==0.6.1
+hrv-analysis==1.0.3

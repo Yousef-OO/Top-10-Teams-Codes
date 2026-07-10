@@ -1,0 +1,49 @@
+{
+    "name": "scatter_res2_",
+    "train_batch_size": 512,
+    "val_batch_size": 512,
+    "data_cached": false,
+    "use_class_weighting": false,
+    "dataloader_worker": 8,
+    "replace_equivalent_classes": false,
+    "normal_xor_abnormal": false,
+    "optimizer": "adam",
+    "loss_type": "both",
+    "scored_only": true,
+    "epochs": 75,
+    "learning_rate": 1e-3,
+    "input_length": 4096,
+
+    "train_preprocess_fillzero_enable": true,
+    "train_preprocess_fillzero_length": 4096,
+    "preprocess_scatter_enable": false,
+    "preprocess_scatter_order": 3,
+    "preprocess_downsample_enable": true,
+    "preprocess_downsample_factor": 2,
+    "preprocess_normalize_enable": true,
+
+    "augment_powernoise_enabled": true,
+    "augment_powernoise_noise": 0.08,
+    "augment_powernoise_prob": 0.5,
+    "augment_randomnoise_enabled": true,
+    "augment_randomnoise_sigma": 0.08,
+    "augment_randomnoise_prob": 0.5,
+    "augment_drift_enabled": true,
+    "augment_drift_sigma": 1.0,
+    "augment_drift_prob": 0.75,
+    "augment_dropoutbursts_enabled": false,
+    "augment_leadfalloff_enabled": false,
+    "augment_randomcrop_enabled": false,
+    "postprocess_normalize_enable": false,
+
+    "feature_extractor": {
+        "type": "scatter_res",
+        "conv1d_kernels":[10, 10, 10, 10, 10, 10, 10],
+        "dropouts": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+    },
+
+    "classifier": {
+        "linear": [94, 72, 64, 48],
+        "dropouts": [0.45, 0.45, 0.45, 0.2]
+    }
+}

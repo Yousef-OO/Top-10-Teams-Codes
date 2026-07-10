@@ -1,0 +1,55 @@
+apiVersion: kubeflow.org/v1beta1
+kind: TFJob
+metadata:
+  name: physionet-train-exp-010
+spec:
+  tfReplicaSpecs:
+    Worker:
+      replicas: 1
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          TTLAfterFinished: 60
+          containers:
+            - args:
+                - apt-get -y update; apt-get -y install git rsync; pip install -r /home/opt/projects/physionet2020/requirements.txt; chown -R 22382:20000 /output/physionet2020/runs/; python -u /home/opt/projects/physionet2020/main_base.py --data_cached False --file /home/opt/projects/physionet2020/cfg/_exp_010.json --data_path /data/opt/physionet2020/data/raw/ --evaluate_orig_data_path /data/opt/physionet2020/data/valtest/val/ --runs_path /output/physionet2020/runs/; chown -R 22382:20000 /output/physionet2020/runs/
+              command:
+                - sh
+                - -c
+              image: pytorch/pytorch:1.5.1-cuda10.1-cudnn7-devel
+              name: tensorflow
+              ports:
+                - containerPort: 2222
+                  name: tfjob-port
+              resources:
+                limits:
+                  cpu: 8
+                  memory: 16384Mi
+                  nvidia.com/gpu: 1
+              volumeMounts:
+                - mountPath: /data/opt
+                  name: nfs-data
+                - mountPath: /output
+                  name: nfs-output
+                - mountPath: /home/opt
+                  name: nfs-home
+                - mountPath: /dev/shm
+                  name: dshm
+          nodeSelector:
+            accelerator: nvidia-tesla-p100
+          restartPolicy: OnFailure
+          ttlSecondsAfterFinishing: 1
+          volumes:
+            - name: nfs-data
+              persistentVolumeClaim:
+                claimName: kflow-opt-data-pvc
+            - name: nfs-output
+              persistentVolumeClaim:
+                claimName: kflow-opt-output-pvc
+            - name: nfs-home
+              persistentVolumeClaim:
+                claimName: kflow-opt-home-pvc
+            - name: dshm
+              emptyDir:
+                medium: Memory

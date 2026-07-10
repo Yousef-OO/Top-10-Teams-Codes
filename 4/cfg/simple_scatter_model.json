@@ -1,0 +1,35 @@
+{
+    "name": "simple_scatter",
+    "train_batch_size": 256,
+    "val_batch_size": 256,
+    "data_cached": false,
+    "use_class_weighting": false,
+    "dataloader_worker": 8,
+    "replace_equivalent_classes": false,
+    "normal_xor_abnormal": false,
+    "optimizer": "adam",
+    "loss_type": "bce",
+    "scored_only": true,
+    "epochs": 1,
+    "learning_rate": 1e-3,
+    "input_length": 4096,
+
+    "train_preprocess_fillzero_enable": true,
+    "train_preprocess_fillzero_length": 4096,
+    "augment_powernoise_enabled": true,
+    "augment_randomnoise_enabled": true,
+    "augment_dropoutbursts_enabled": false,
+    "augment_leadfalloff_enabled": false,
+    "augment_randomcrop_enabled": false,
+    "train_postprocess_normalize_enable": false,
+    "val_normalize_enable": false,
+
+    "feature_extractor": {
+        "type": "simple_scatter",
+        "scatter_channels": [24, 48, 96, 192, 256, 256]
+    },
+    "classifier": {
+        "linear": [256, 128],
+        "dropouts": [0.45, 0.2]
+    }
+}

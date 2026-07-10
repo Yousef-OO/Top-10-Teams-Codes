@@ -1,0 +1,21 @@
+{
+    "name": "simple_attention_model",
+    "train_batch_size": 96,
+    "test_batch_size": 46,
+    "val_batch_size": 46,
+    "learning_rate": 3e-4,
+    "input_length": 8192,
+    "epochs": 1,
+
+    "feature_extractor": {
+        "type": "simple_attn",
+        "n_encoder_heads": 6,
+        "n_attention_heads": 12,
+        "positional_encoding": true
+    },
+
+    "classifier": {
+        "linear": [768, 128],
+        "dropouts": [0.45, 0.2]
+    }
+}
